@@ -9,17 +9,12 @@
 #ifndef __NRF24_COMMUNICATION_H__
 #define __NRF24_COMMUNICATION_H__
 
-#include "commands.h"
+#include "../commands.h"
 
 class nrf24_Communication : public CommunicationWrapper
 {
-//variables
-public:
-protected:
-private:
 
-//functions
-public:
+  public:
 	nrf24_Communication();
 	~nrf24_Communication();
 
@@ -31,8 +26,7 @@ public:
 	
 	virtual void waiting();
 /*
-protected:
-private:
+  private:
 	nrf24_Communication( const nrf24_Communication &c );
 	nrf24_Communication& operator=( const nrf24_Communication &c );*/
 

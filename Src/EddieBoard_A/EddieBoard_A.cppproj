@@ -150,28 +150,28 @@
     <Compile Include="HSV.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="nrf24.cpp">
+    <Compile Include="nrf24\nrf24.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="nrf24.h">
+    <Compile Include="nrf24\nrf24.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="nRF24L01.h">
+    <Compile Include="nrf24\nRF24L01.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="nrf24_Communication.cpp">
+    <Compile Include="nrf24\nrf24_Communication.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="nrf24_Communication.h">
+    <Compile Include="nrf24\nrf24_Communication.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="nrf24\radioPinFunctions.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="pwm.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="pwm.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="radioPinFunctions.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="spi\spi.c">
@@ -182,6 +182,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="nrf24" />
     <Folder Include="spi" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

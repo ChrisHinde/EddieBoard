@@ -16,10 +16,10 @@
 #include "pwm.h"
 #include "color_modes.h"
 #include "commands.h"
-#include "nrf24_Communication.h"
+#include "nrf24/nrf24_Communication.h"
 
-#include "nRF24L01.h"
-#include "nrf24.h"
+#include "nrf24/nRF24L01.h"
+#include "nrf24/nrf24.h"
 
 /* ------------------------------------------------------------------------- */
 uint8_t temp;
