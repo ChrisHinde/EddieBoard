@@ -11,22 +11,10 @@
 
 #include <stdint.h>
 
-/*typedef struct RgbColor
-{
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-} RgbColor;
-
-typedef struct HsvColor
-{
-	unsigned char h;
-	unsigned char s;
-	unsigned char v;
-} HsvColor;*/
 
 class HsvColor;
 
+/* Handles RGB data */
 class RgbColor {
 	public:
 		uint8_t r;
@@ -39,6 +27,7 @@ class RgbColor {
 	
 		HsvColor ToHSV();
 };
+/* Handles HSV data */
 class HsvColor {
 	public:
 		uint8_t h;
@@ -50,11 +39,5 @@ class HsvColor {
 	
 		RgbColor ToRGB();
 };
-
-RgbColor HsvToRgb(HsvColor hsv);
-HsvColor RgbToHsv(RgbColor rgb);
-
-
-
 
 #endif /* HSV_H_ */

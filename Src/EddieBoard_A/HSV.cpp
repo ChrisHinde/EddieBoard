@@ -7,12 +7,14 @@
 
 #include "HSV.h"
 
+/* Create a RGB object */
 RgbColor::RgbColor( uint8_t r, uint8_t g, uint8_t b )
 {
 	this->r = r;
 	this->g = g;
 	this->b = b;
 }
+/* Create a HSV object */
 HsvColor::HsvColor( uint8_t h, uint8_t s, uint8_t v )
 {
 	this->h = h;
@@ -20,25 +22,26 @@ HsvColor::HsvColor( uint8_t h, uint8_t s, uint8_t v )
 	this->v = v;
 }
 
+/* Convert the HSV to RGB */
 RgbColor
-HsvToRgb(HsvColor hsv)
+HsvColor::ToRGB()
 {
 	RgbColor rgb;
 	unsigned char region, p, q, t;
 	unsigned int h, s, v, remainder;
 
-	if (hsv.s == 0)
+	if (this->s == 0)
 	{
-		rgb.r = hsv.v;
-		rgb.g = hsv.v;
-		rgb.b = hsv.v;
+		rgb.r = this->v;
+		rgb.g = this->v;
+		rgb.b = this->v;
 		return rgb;
 	}
 
 	// converting to 16 bit to prevent overflow
-	h = hsv.h;
-	s = hsv.s;
-	v = hsv.v;
+	h = this->h;
+	s = this->s;
+	v = this->v;
 
 	region = h / 43;
 	remainder = (h - (region * 43)) * 6;
@@ -84,36 +87,26 @@ HsvToRgb(HsvColor hsv)
 	return rgb;
 }
 
+/* Convert the RGB to HSV */
 HsvColor
-RgbToHsv(RgbColor rgb)
+RgbColor::ToHSV()
 {
 	HsvColor hsv;
 	unsigned char rgbMin, rgbMax;
 
-	rgbMin = rgb.r < rgb.g ? (rgb.r < rgb.b ? rgb.r : rgb.b) : (rgb.g < rgb.b ? rgb.g : rgb.b);
-	rgbMax = rgb.r > rgb.g ? (rgb.r > rgb.b ? rgb.r : rgb.b) : (rgb.g > rgb.b ? rgb.g : rgb.b);
+	rgbMin = this->r < this->g ? (this->r < this->b ? this->r : this->b) : (this->g < this->b ? this->g : this->b);
+	rgbMax = this->r > this->g ? (this->r > this->b ? this->r : this->b) : (this->g > this->b ? this->g : this->b);
 
 	hsv.v = rgbMax;
-	/*if (hsv.v == 0)
-	{
-		hsv.h = 0;
-		hsv.s = 0;
-		return hsv;
-	}*/
 
 	hsv.s = 255 * ((long)(rgbMax - rgbMin)) / hsv.v;
-	/*if (hsv.s == 0)
-	{
-		hsv.h = 0;
-		return hsv;
-	}*/
 
-	if (rgbMax == rgb.r)
-		hsv.h = 0 + 43 * (rgb.g - rgb.b) / (rgbMax - rgbMin);
-	else if (rgbMax == rgb.g)
-		hsv.h = 85 + 43 * (rgb.b - rgb.r) / (rgbMax - rgbMin);
+	if (rgbMax == this->r)
+		hsv.h = 0 + 43 * (this->g - this->b) / (rgbMax - rgbMin);
+	else if (rgbMax == this->g)
+		hsv.h = 85 + 43 * (this->b - this->r) / (rgbMax - rgbMin);
 	else
-		hsv.h = 171 + 43 * (rgb.r - rgb.g) / (rgbMax - rgbMin);
+		hsv.h = 171 + 43 * (this->r - this->g) / (rgbMax - rgbMin);
 
 	return hsv;
 }

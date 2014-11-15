@@ -24,12 +24,12 @@ uint8_t invert_pwm = 0;
 
 RgbColor rgb;
 
-//HsvColor current_color = { .h = 0, .s = 255, .v = 255 };
-
+/* Initialize the PWM functionality */
 void pwm_initialize()
 {
 	pwm_initialize( 0 );
 }
+/* Initialize the PWM functionality (Invert is useful when having a RGB LED with common anode) */
 void pwm_initialize( uint8_t invert )
 {
 	invert_pwm  = invert;
@@ -59,21 +59,21 @@ void pwm_initialize( uint8_t invert )
 	DDRD |= 1<<PD6; // OC0A
 	
 }
-// Enable PWM channels
+/* Enable PWM channels */
 void pwm_enable(int channel) {
 	if (channel & CHAN_OC0A) TCCR0A |= 1<<COM0A1;
 	if (channel & CHAN_OC0B) TCCR0A |= 1<<COM0B1;
 	if (channel & CHAN_OC2B) TCCR2A |= 1<<COM2B1;
 }
 
-// Disable PWM channels
+/* Disable PWM channels */
 void pwm_disable(int channel) {
 	if (channel & CHAN_OC0A) TCCR0A &= ~(1<<COM0A1);
 	if (channel & CHAN_OC0B) TCCR0A &= ~(1<<COM0B1);
 	if (channel & CHAN_OC2B) TCCR2A &= ~(1<<COM2B1);
 }
 
-// Sets the channel brightness
+/* Sets the channel brightness */
 void pwm_dutycycle(int channel, uint8_t dutycycle) {
 	if (invert_pwm) dutycycle = 255 - dutycycle;
 	if (channel & CHAN_OC0A) OCR0A = dutycycle;
@@ -81,22 +81,21 @@ void pwm_dutycycle(int channel, uint8_t dutycycle) {
 	if (channel & CHAN_OC2B) OCR2B = dutycycle;
 }
 
-
+/* Use HSV data to set the color of the LEDs */
 void setHSV( HsvColor color )
 {
-	rgb = HsvToRgb( color );
+	rgb = color.ToRGB();
 	
 	red_pwm   = rgb.r;
 	green_pwm = rgb.g;
 	blue_pwm  = rgb.b;
-	//red_pwm -= 1;
 
 	pwm_dutycycle( CHAN_RED,   red_pwm );
 	pwm_dutycycle( CHAN_GREEN, green_pwm );
 	pwm_dutycycle( CHAN_BLUE,  blue_pwm );
 }
 
-
+/* Simple delay function that takes an variable (_delay_ms only takes constants) */
 void delay( int ms )
 {
 	while(ms--) {

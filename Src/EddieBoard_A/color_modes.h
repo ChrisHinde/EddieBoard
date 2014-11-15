@@ -11,6 +11,7 @@
 
 #include "HSV.h"
 
+/* All the available color modes (should be kept under 15 or 0x0F) */
 enum COLOR_MODE {
 	OFF             = 0x00,
 	
@@ -29,16 +30,17 @@ enum COLOR_MODE {
 	RAINBOW			= 0x0D
 };
 
+
 void setMode( enum COLOR_MODE mode );
 void setModeHSV( enum COLOR_MODE mode, HsvColor &color );
 void setModeRGB( enum COLOR_MODE mode, RgbColor &color );
 
 void setTempMode( enum COLOR_MODE mode );
-void setTempMode( enum COLOR_MODE mode, uint8_t ttl );
+void setTempMode( enum COLOR_MODE mode, int16_t ttl );
 void setTempModeHSV( enum COLOR_MODE mode, HsvColor &color );
-void setTempModeHSV( enum COLOR_MODE mode, HsvColor &color, uint8_t ttl );
+void setTempModeHSV( enum COLOR_MODE mode, HsvColor &color, int16_t ttl );
 void setTempModeRGB( enum COLOR_MODE mode, RgbColor &color );
-void setTempModeRGB( enum COLOR_MODE mode, RgbColor &color, uint8_t ttl );
+void setTempModeRGB( enum COLOR_MODE mode, RgbColor &color, int16_t ttl );
 
 
 void setCurrentHSV( HsvColor color );
@@ -50,8 +52,10 @@ void setValue( uint8_t value );
 void setSpeed( uint8_t speed );
 void setTempSpeed( uint8_t speed );
 
+
 void runMode();
 void runTempMode();
+
 
 int random( int value );
 int random_sin( int value );

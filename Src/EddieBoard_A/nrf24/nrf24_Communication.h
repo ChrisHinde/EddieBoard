@@ -11,6 +11,7 @@
 
 #include "../commands.h"
 
+/* Handles the nrf24 communication */
 class nrf24_Communication : public CommunicationWrapper
 {
 
@@ -25,10 +26,9 @@ class nrf24_Communication : public CommunicationWrapper
 	virtual COMMUNICATION_STATUS status();
 	
 	virtual void waiting();
-/*
-  private:
-	nrf24_Communication( const nrf24_Communication &c );
-	nrf24_Communication& operator=( const nrf24_Communication &c );*/
+	
+	virtual bool hasData();
+	virtual void getData( uint8_t *data );
 
 }; //nrf24_Communication
 
